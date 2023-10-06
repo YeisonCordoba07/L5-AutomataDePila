@@ -147,7 +147,7 @@ function dibujar(){
         canvas.fillText(i.letra, i.x + 20, i.y + 35); // Dibujar la letra en el centro del cuadro
 
 
-        if(i.y >= espaciado && i.mover === true){
+        if(i.y >= i.espaciado && i.mover === true){
             i.y = i.espaciado;
             i.mover = false;
 
