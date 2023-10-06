@@ -1,15 +1,28 @@
 const canvasIndex = document.getElementById('canvas');
 const canvas = canvasIndex.getContext('2d');
 const cuadros = []; // Array para almacenar los cuadros
-const velocidad = 5; // Velocidad de movimiento
+const velocidad = 15; // Velocidad de movimiento
 const cuadroSize = 50; // Tamaño de cada cuadro
-const suelo = canvas.height - cuadroSize; // Posición del suelo
+const suelo = canvasIndex.height - cuadroSize; // Posición del suelo
 var espaciado = suelo;
 var n = 0;
 var contador = 0;
+const posicionXInicial = 25;
+const posicionYInicial = 10;
 
 
-
+function agregarCuadro(xi, yi, w, h, c, l){
+    cuadros.push({
+        x: xi,
+        y: yi,
+        width: w,
+        height: h,
+        color: c,
+        letra: l,
+    });
+    contador = contador + 1;
+    espaciado = espaciado - cuadroSize;
+}
 
 // Agregar un evento para detectar las teclas presionadas
 window.addEventListener('keydown', function (event) {
@@ -26,16 +39,17 @@ window.addEventListener('keydown', function (event) {
             letra: "a",
         }*/
         cuadros.push({
-            x: cuadroSize,
-            y: cuadroSize,
+            x: posicionXInicial,
+            y: posicionYInicial,
             width: cuadroSize,
             height: cuadroSize,
-            width: cuadroSize,
             color: "blue",
             letra: "a",
+            mover: true,
+            espaciado: espaciado - cuadroSize,
         });
         contador = contador + 1;
-        espaciado = espaciado + cuadroSize;
+        espaciado = espaciado - cuadroSize;
 
     }else if(event.key === "b"){
 
@@ -49,17 +63,18 @@ window.addEventListener('keydown', function (event) {
             letra: "b",
         }*/
         cuadros.push({
-            x: cuadroSize,
-            y: cuadroSize,
+            x: posicionXInicial,
+            y: posicionYInicial,
             width: cuadroSize,
             height: cuadroSize,
-            width: cuadroSize,
             color: "green",
             letra: "b",
+            mover: true,
+            espaciado: espaciado - cuadroSize,
         });
         contador = contador + 1;
         n = n + 1;
-        espaciado = espaciado + cuadroSize;
+        espaciado = espaciado - cuadroSize;
 
     }else if(event.key === "c"){
 
@@ -73,13 +88,14 @@ window.addEventListener('keydown', function (event) {
             letra: "c",
         }*/
         cuadros.push({
-            x: cuadroSize,
-            y: cuadroSize,
+            x: posicionXInicial,
+            y: posicionYInicial,
             width: cuadroSize,
             height: cuadroSize,
-            width: cuadroSize,
             color: "red",
             letra: "c",
+            mover: true,
+            espaciado: espaciado - cuadroSize,
         });
         contador = contador + 1;
 
@@ -95,13 +111,14 @@ window.addEventListener('keydown', function (event) {
             letra: "d",
         }*/
         cuadros.push({
-            x: cuadroSize,
-            y: cuadroSize,
+            x: posicionXInicial,
+            y: posicionYInicial,
             width: cuadroSize,
             height: cuadroSize,
-            width: cuadroSize,
             color: "orange",
             letra: "d",
+            mover: true,
+            espaciado: espaciado - cuadroSize,
         });
         contador = contador + 1;
 
@@ -113,7 +130,7 @@ window.addEventListener('keydown', function (event) {
 
 
 function dibujar(){
-    canvas.clearRect(0,0,canvas.width, canvas.height);
+    canvas.clearRect(0,0,canvasIndex.width, canvasIndex.height);
 
     //Dibuja todos los cuadros
     cuadros.forEach(function(i){
@@ -129,12 +146,18 @@ function dibujar(){
         canvas.font = '30px Arial'; // Fuente y tamaño del texto
         canvas.fillText(i.letra, i.x + 20, i.y + 35); // Dibujar la letra en el centro del cuadro
 
-        i.y = i.y + velocidad;
-        if(i.y >= espaciado){
-            i.y = espaciado;
+
+        if(i.y >= espaciado && i.mover === true){
+            i.y = i.espaciado;
+            i.mover = false;
+
+        }else if(i.mover === true){
+            i.y = i.y + velocidad;
         }
+        console.log(i);
 
     });
+    
 }
 
 function gameLoop(){
