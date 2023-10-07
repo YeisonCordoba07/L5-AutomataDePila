@@ -12,6 +12,9 @@ const posicionXInicial = 25;
 const posicionYInicial = 10;
 
 
+var pEntrada = document.getElementById("p-entrada");
+var pEstado = document.getElementById("p-estado");
+
 //Agrega un cuadro al vector de cuadros
 function agregarCuadro(colorC, letraC, espaciadoC, posicionC){
     cuadros.push({
@@ -29,27 +32,36 @@ function agregarCuadro(colorC, letraC, espaciadoC, posicionC){
     espaciado = espaciado - cuadroSize;
 }
 
+function actualizaEntrada (entrada){
+    let anterior = pEntrada.textContent;
+    pEntrada.textContent = anterior + entrada;
+}
+
 // Agregar un evento para detectar las teclas presionadas
 window.addEventListener('keydown', function (event) {
 
     if(event.key === "a"){
 
         agregarCuadro("rgb(181,230,29)", "a", espaciado - cuadroSize, contador);
+        actualizaEntrada("a");
 
     }else if(event.key === "b"){
 
         agregarCuadro("rgb(34,177,76)", "b", espaciado - cuadroSize, contador);
         n = n + 1;
+        actualizaEntrada("b");
 
     }else if(event.key === "c"){
 
         agregarCuadro("red", "c", espaciado - cuadroSize, contador);
         espaciado = espaciado + cuadroSize*2;
+        actualizaEntrada("c");
 
     }else if(event.key === "d"){
 
         agregarCuadro("orange", "d", espaciado - cuadroSize, contador);
         espaciado = espaciado + cuadroSize*2;
+        actualizaEntrada("d");
     }
 
 });
