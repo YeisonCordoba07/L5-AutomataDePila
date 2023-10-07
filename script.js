@@ -1,6 +1,7 @@
 const canvasIndex = document.getElementById('canvas');
 const canvas = canvasIndex.getContext('2d');
 var cuadros = []; // Array para almacenar los cuadros
+var eliminados = []; // Array con los cuadros eliminados
 const velocidad = 20; // Velocidad de movimiento
 const cuadroSize = 50; // Tamaño de cada cuadro
 const suelo = canvasIndex.height - cuadroSize; // Posición del suelo
@@ -11,6 +12,7 @@ const posicionXInicial = 25;
 const posicionYInicial = 10;
 
 
+//Agrega un cuadro al vector de cuadros
 function agregarCuadro(colorC, letraC, espaciadoC, posicionC){
     cuadros.push({
         x: posicionXInicial,
@@ -31,11 +33,12 @@ function agregarCuadro(colorC, letraC, espaciadoC, posicionC){
 window.addEventListener('keydown', function (event) {
 
     if(event.key === "a"){
-        agregarCuadro("blue", "a", espaciado - cuadroSize, contador);
+
+        agregarCuadro("rgb(181,230,29)", "a", espaciado - cuadroSize, contador);
 
     }else if(event.key === "b"){
 
-        agregarCuadro("green", "b", espaciado - cuadroSize, contador);
+        agregarCuadro("rgb(34,177,76)", "b", espaciado - cuadroSize, contador);
         n = n + 1;
 
     }else if(event.key === "c"){
@@ -47,7 +50,6 @@ window.addEventListener('keydown', function (event) {
 
         agregarCuadro("orange", "d", espaciado - cuadroSize, contador);
         espaciado = espaciado + cuadroSize*2;
-
     }
 
 });
@@ -78,21 +80,41 @@ function dibujar(){
             i.mover = false;
             if(i.letra === "c" || i.letra === "d"){
 
-                console.log(cuadros);
+                eliminados.push(cuadros[i.posicion]);
+                eliminados.push(cuadros[i.posicion - 1]);
                 cuadros = cuadros.filter(elemento => elemento.posicion < i.posicion -1);
-
                 contador = contador - 2;
-                console.log(cuadros);
-
             }
 
         }else if(i.mover === true){
             i.y = i.y + velocidad;
         }
 
-
     });
-    
+
+    // Anima eliminación de cuadros
+    eliminados.forEach(function(i){
+
+        canvas.fillStyle = i.color;
+        canvas.fillRect(
+            i.x,
+            i.y,
+            i.width,
+            i.height
+        );
+
+        canvas.fillStyle = 'white'; // Color del texto
+        canvas.font = '30px Arial'; // Fuente y tamaño del texto
+        canvas.fillText(i.letra, i.x + 20, i.y + 35); // Dibujar la letra en el centro del cuadro
+        if(i.width >= 2){
+            i.width = i.width - 4;
+            i.height = i.height - 4;
+            i.x = i.x + 2;
+            i.y = i.y + 2;
+        }else{
+            eliminados.pop();
+        }
+    });
 }
 
 function gameLoop(){
