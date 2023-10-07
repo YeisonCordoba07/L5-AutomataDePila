@@ -4,8 +4,8 @@
     margin: 0;
     font-family: Roboto, Cartero, 'Helvetiva Neue', Helvetica, Arial, 'Sans Serif';
     font-weight: 400;
-    line-height: 22px;
-    border-radius: 15px;
+    line-height: 30px;
+    border-radius: 10px;
 }
 
 body{
@@ -35,10 +35,18 @@ main{
     flex-direction: column;
     justify-content: space-between;
     background-color: antiquewhite;
-    width: 40%;
+    width: 45%;
     padding: 20px;
 }
-
+.contenedor-imagen{
+    height: 100%;
+    width: 45%;
+    background-color: bisque;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
 h2{
     font-size: 40px;
     font-weight: bolder;
@@ -67,11 +75,7 @@ p{
     line-height: 1;
 }
 
-.contenedor-imagen{
-    height: 100%;
-    width: 90%;
-    background-color: bisque;
-}
+
 
 footer{
     width: 100%;
@@ -94,3 +98,11 @@ footer{
     color: white;
     font-weight: bolder;
 }
+
+#imagen-formula{
+    width: 70%;
+}
+#imagen-cuadros{
+    width: 70%;
+}
+

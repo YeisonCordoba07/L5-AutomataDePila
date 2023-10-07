@@ -4,7 +4,7 @@ var cuadros = []; // Array para almacenar los cuadros
 var eliminados = []; // Array con los cuadros eliminados
 const velocidad = 20; // Velocidad de movimiento
 const cuadroSize = 50; // Tamaño de cada cuadro
-const suelo = canvasIndex.height - cuadroSize; // Posición del suelo
+const suelo = canvasIndex.height - 2; // Posición del suelo
 var espaciado = suelo;
 var n = 0;
 var contador = 0;
@@ -42,18 +42,19 @@ window.addEventListener('keydown', function (event) {
 
     if(event.key === "a"){
 
-        agregarCuadro("rgb(181,230,29)", "a", espaciado - cuadroSize, contador);
+        //rgb(181,230, 29) #daa520
+        agregarCuadro("darkgoldenrod", "a", espaciado - cuadroSize, contador);
         actualizaEntrada("a");
 
     }else if(event.key === "b"){
-
-        agregarCuadro("rgb(34,177,76)", "b", espaciado - cuadroSize, contador);
+        //rgb(34, 177, 76) #6b8e23
+        agregarCuadro("darkcyan", "b", espaciado - cuadroSize, contador);
         n = n + 1;
         actualizaEntrada("b");
 
     }else if(event.key === "c"){
 
-        agregarCuadro("red", "c", espaciado - cuadroSize, contador);
+        agregarCuadro("orangered", "c", espaciado - cuadroSize, contador);
         espaciado = espaciado + cuadroSize*2;
         actualizaEntrada("c");
 
@@ -83,9 +84,13 @@ function dibujar(){
         );
 
         canvas.fillStyle = 'white'; // Color del texto
-        canvas.font = '30px Arial'; // Fuente y tamaño del texto
+        canvas.font = '25px Arial'; // Fuente y tamaño del texto
         canvas.fillText(i.letra, i.x + 20, i.y + 35); // Dibujar la letra en el centro del cuadro
 
+        // Agregar un borde al cuadro
+        canvas.strokeStyle = "white"; // Color del borde
+        canvas.lineWidth = 2; // Ancho del borde
+        canvas.strokeRect(i.x, i.y, i.width, i.height); // Dibuja el borde alrededor del cuadro existente
 
         if(i.y >= i.espaciado && i.mover === true){
             i.y = i.espaciado;
