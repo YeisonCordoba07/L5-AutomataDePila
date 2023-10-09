@@ -17,7 +17,10 @@ var invalida = false; // Poner entradas como validas o invalidas
 var pEntrada = document.getElementById("p-entrada"); // Parrafo donde se muestra la entrada completa
 var pEstado = document.getElementById("p-estado"); // Parrafo donde se muestra el estado de la entrada
 
+var colorAceptado = "#a4dc41"; // Color de fondo cuando se acepta la entrada
+var colorRechazado = "#c40606bb"; // Color de fondo cuando se rechaza la entrada
 
+var contenedorEstado = document.querySelector("#contenedor-estado"); // Color de fondo del estado
 
 
 // Agrega un cuadro al vector de cuadros
@@ -62,6 +65,7 @@ window.addEventListener('keydown', function (event) {
 
             pEstado.textContent = "Invalida";
             invalida = true;
+            contenedorEstado.style.backgroundColor = colorRechazado;
 
         }else{
 
@@ -82,6 +86,7 @@ window.addEventListener('keydown', function (event) {
         if(contadorEntradas !== 1){
             pEstado.textContent = "Invalida";
             invalida = true;
+            contenedorEstado.style.backgroundColor = colorRechazado;
         }
         
 
@@ -97,6 +102,7 @@ window.addEventListener('keydown', function (event) {
 
             pEstado.textContent = "Invalida";
             invalida = true;
+            contenedorEstado.style.backgroundColor = colorRechazado;
 
         }else{
 
@@ -106,6 +112,7 @@ window.addEventListener('keydown', function (event) {
 
                 pEstado.textContent = "Aceptada";
                 contadorEntradas = 4;
+                contenedorEstado.style.backgroundColor = colorAceptado;
             }
            
         }
@@ -131,10 +138,12 @@ window.addEventListener('keydown', function (event) {
 
             pEstado.textContent = "Aceptada";
             contadorEntradas = contadorEntradas + 1;
+            contenedorEstado.style.backgroundColor = colorAceptado;
 
         }else{
             
             pEstado.textContent = "Invalida";
+            contenedorEstado.style.backgroundColor = colorRechazado;
         }
     }
 

@@ -68,7 +68,12 @@ p{
     padding: 10px;
 }
 
-#p-entrada{
+#contenedor-estado{
+    background-color: #c40606bb;
+    transition: 1s;
+}
+
+#p-entrada, #p-estado{
     font-size: 35px;
 
     word-break: break-all;
